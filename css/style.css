@@ -114,8 +114,6 @@
   font-size: var(--text-4xl);
   color: var(--color-white);
   letter-spacing: 0.1em;
-  opacity: 0;
-  animation: loadFadeIn 0.8s ease forwards;
 }
 
 .loading-screen__bar {
@@ -124,8 +122,6 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   overflow: hidden;
-  opacity: 0;
-  animation: loadFadeIn 0.8s ease 0.2s forwards;
 }
 
 .loading-screen__bar-inner {
@@ -133,7 +129,7 @@
   height: 100%;
   background: var(--color-primary);
   border-radius: 2px;
-  animation: loadBar 1.2s ease 0.3s forwards;
+  animation: loadBar 1.2s ease forwards;
 }
 
 @keyframes loadFadeIn {
@@ -625,7 +621,7 @@ button {
 }
 
 .hero__text-ja span {
-  color: #D32F2F;
+  color: #fff;
 }
 
 .hero__text-en {

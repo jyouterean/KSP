@@ -68,17 +68,36 @@ function initLoadingScreen() {
   if (!loadingScreen) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const delay = reducedMotion ? 0 : CONFIG.loading.delay;
+
+  if (reducedMotion) {
+    loadingScreen.classList.add('loaded');
+    setTimeout(() => loadingScreen.remove(), CONFIG.loading.removeDelay);
+    return;
+  }
+
+  // Wait for both page load AND animation to complete
+  const animationDuration = 1400; // bar fill (1.2s) + buffer
+  let pageLoaded = false;
+  let animationDone = false;
+
+  function tryHide() {
+    if (pageLoaded && animationDone) {
+      loadingScreen.classList.add('loaded');
+      setTimeout(() => loadingScreen.remove(), CONFIG.loading.removeDelay);
+    }
+  }
 
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      loadingScreen.classList.add('loaded');
-      setTimeout(() => {
-        loadingScreen.remove();
-      }, CONFIG.loading.removeDelay);
-    }, delay);
+    pageLoaded = true;
+    tryHide();
   });
 
+  setTimeout(() => {
+    animationDone = true;
+    tryHide();
+  }, animationDuration);
+
+  // Fallback: force hide after timeout
   setTimeout(() => {
     if (loadingScreen && !loadingScreen.classList.contains('loaded')) {
       loadingScreen.classList.add('loaded');
