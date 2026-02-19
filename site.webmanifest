@@ -1,0 +1,14 @@
+{
+  "name": "株式会社KSP",
+  "short_name": "KSP",
+  "icons": [
+    {
+      "src": "images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#D32F2F",
+  "background_color": "#FFFFFF",
+  "display": "standalone"
+}
